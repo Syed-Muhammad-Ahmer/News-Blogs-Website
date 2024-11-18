@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .metadata {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .like-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 30px;
+        }
+
+        .like-button:hover {
+            background-color: #0056b3;
+        }
+
+        .comments-section {
+            margin-top: 40px;
+        }
+
+        .comments-section h3 {
+            margin-bottom: 20px;
+        }
+
+        .comment {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .comment:last-child {
+            border-bottom: none;
+        }
+
+        .comment-form {
+            margin-top: 20px;
+        }
+
+        .comment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .comment-form button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .comment-form button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- News Title -->
+    <h1>{{ news.news_title }}</h1>
+    <p class="metadata">Published on {{ news.created_at }} by {{ author.user_name }}</p>
+    
+    <!-- News Content -->
+    <div class="content">
+        {{ news.news_body }}
+    </div>
+    
+    <!-- Like Button -->
+    <form action="/news/{{ news.news_id }}/like" method="POST" >
+        <button type="submit" class="like-button">Like ({{ news.likes }})</button>
+    </form>
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <h3>Comments ({{ comments | length }})</h3>
+        
+        <!-- Display Comments -->
+        {% for comment in comments %}
+            <div class="comment">
+                <strong>{{ comment.user_name }}</strong> said:
+                <p>{{ comment.comment_body }}</p>
+            </div>
+        {% endfor %}
+        
+        <!-- Comment Form -->
+        <div class="comment-form">
+            <h4>Leave a Comment</h4>
+            <form method="POST" action="/news/{{ news.news_id }}/comment">
+                <textarea name="comment" placeholder="Write your comment here..." required></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
