@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journalist Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        header nav .logout-button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #555;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .view-btn {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .add-btn {
+            display: inline-block;
+            background: green;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .content.preview {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Number of lines to display */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 4.5em; /* Adjust based on line height (e.g., 1.5em per line) */
+        line-height: 1.5em; /* Ensure consistent line spacing */
+    }
+
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/home_journalist" class="home-link">Home</a>
+        <a href="/journalist/add_news" class="add-btn">Add News</a>
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="logout-button">Log Out</button>
+        </form>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Welcome, Journalist!</h1>
+
+    <!-- View All News -->
+    <section class="news-list">
+        <h2>All News</h2>
+        <ul>
+            {% for news in all_news %}
+                <li>
+                    <h4>{{ news.news_title }}</h4>
+                    <div class="content preview">
+                        {{ news.news_body | safe }}
+                    </div>   
+                    <a href="/news/{{ news.news_id }}" class="view-btn">View Full Page</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+</body>
+</html>
