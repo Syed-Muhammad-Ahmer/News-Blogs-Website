@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        header nav .logout-button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input,
+        .input-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background: green;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="/home_journalist" class="home-link">Home</a>
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="logout-button">Log Out</button>
+            </form>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Add News</h1>
+        <form action="/journalist/add_news" method="POST">
+            <div class="input-group">
+                <label for="news_title">News Title</label>
+                <input type="text" id="news_title" name="news_title" required>
+            </div>
+            <div class="input-group">
+                <label for="news_body">News Body</label>
+                <textarea id="news_body" name="news_body" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit News</button>
+        </form>
+    </div>
+</body>
+<script src="https://cdn.ckeditor.com/4.22.0/standard/ckeditor.js"></script>
+<script>
+    // Initialize CKEditor for the textarea
+    CKEDITOR.replace('news_body');
+</script>
+
+</html>
