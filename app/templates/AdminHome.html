@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='adminhome.css') }}">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="/home_admin" class="home-link">Home</a>
+        <form action="/logout" method="POST" style="display: inline;">
+            <button type="submit" class="logout-button">Log Out</button>
+        </form>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Welcome, Admin!</h1>
+    
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="flash-message">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <!-- Admin Functionalities -->
+    <section class="admin-actions">
+        <h2>Admin Actions</h2>
+
+        <!-- Approve Pending Posts -->
+        <div class="approve-posts">
+            <h3>Pending Posts</h3>
+            <ul>
+                {% for post in pending_posts %}
+                    <li>
+                        <h4>{{ post.news_title }}</h4>
+                        <div class="content preview">
+                            {{ post.news_body | safe }}
+                        </div>                        
+                        <form action="/admin/approve/{{ post.news_id }}" method="POST" style="display: inline;">
+                            <button type="submit" class="approve-btn">Approve</button>
+                        </form>
+                        <form action="/admin/delete/{{ post.news_id }}" method="POST" style="display: inline;">
+                            <button type="submit" class="delete-btn">Decline</button>
+                        </form>
+                        <a href="/news/{{ post.news_id }}" class="view-btn">View Full Page</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <!-- Subscriber Functionalities -->
+    <section class="subscriber-actions">
+        <h2>Other Features</h2>
+
+        <!-- Display All Posts -->
+        <div class="all-posts">
+            <h3>All Posts</h3>
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <h4>{{ post.news_title }}</h4>
+                        <div class="content preview">
+                            {{ post.news_body | safe }}
+                        </div>   
+                        <a href="/news/{{ post.news_id }}" class="view-btn">View Full Page</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</div>
+</body>
+</html>
