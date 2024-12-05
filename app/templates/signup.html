@@ -1,4 +1,3 @@
-<!-- templates/signup.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,27 +5,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
+    <!-- Add Google Fonts for a consistent look -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;400;600&family=Bangers&display=swap" rel="stylesheet">
     <style>
+        /* Set general body font and background */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
         }
 
-        .container {
-            width: 300px;
-            margin: 100px auto;
-            padding: 20px;
+        /* Logo heading style */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px; /* Space between logo and form */
+        }
+
+        .logo-heading {
+            font-family: 'Bangers', cursive;
+            font-size: 60px; /* Larger size for the logo */
+            color: #0066cc;
+            margin: 0;
+        }
+
+        /* Signup container styles */
+        .signup-container {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
         }
 
+        /* Heading style */
         h2 {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            color: #333;
             text-align: center;
+            margin-bottom: 20px;
         }
 
+        /* Form group styles */
         .form-group {
             margin-bottom: 15px;
         }
@@ -49,18 +75,20 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #28a745;
+            background-color: #0066cc; /* Change to blue */
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
-
+        
         button:hover {
-            background-color: #218838;
+            background-color: #0057a3; /* Darker blue on hover */
         }
+        
 
-        .error {
+        .error 
+        {
             color: red;
             font-size: 12px;
         }
@@ -74,22 +102,21 @@
 </head>
 
 <body>
+     <div class="logo-container">
+        <h1 class="logo-heading">Horizon News</h1>
+    </div>
 
-    <div class="container">
+    <div class="signup-container">
         <h2>Create an Account</h2>
         <form method="POST" action="{{ url_for('main.signup') }}">
             <!-- Displaying success or error messages -->
-            <!-- {% if message %}
-            <div class="{{ message_type }}">{{ message }}</div>
-            {% endif %} -->
-
-            {% with messages = get_flashed_messages()%}
-                {% if messages%}
-                    {% for message in messages%}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
                     <div class="{{ message_type }}">{{ message }}</div>
-                    {%endfor%}
-                {%endif%}
-            {%endwith%}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
 
             <div class="form-group">
                 <label for="username">Username</label>
@@ -105,7 +132,6 @@
                 <label for="role">Select Role</label>
                 <select id="role" name="role" required>
                     <option value="">Select Role</option>
-                    <!-- Looping through roles from the database -->
                     {% for role in roles %}
                     <option value="{{ role.role_id }}">{{ role.role_name }}</option>
                     {% endfor %}
@@ -115,7 +141,6 @@
             <button type="submit">Sign Up</button>
         </form>
     </div>
-
 </body>
 
 </html>
