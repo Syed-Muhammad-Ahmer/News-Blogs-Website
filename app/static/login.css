@@ -1,60 +1,104 @@
-/* app/static/styles.css */
+/* Set general body font and background */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
 }
 
-h1 {
+/* Logo heading style */
+.logo-container {
     text-align: center;
-    color: #333;
+    margin-bottom: 30px; /* Space between logo and login form */
 }
 
+.logo-heading {
+    font-family: 'Bangers', cursive;
+    font-size: 60px; /* Larger size for logo */
+    color: #0066cc;
+    margin: 0;
+}
+
+/* Login container styles */
 .login-container {
-    width: 300px;
-    margin: 100px auto;
-    background-color: #fff;
-    padding: 20px;
+    background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
 }
 
+/* Heading style */
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Input group styles */
 .input-group {
     margin-bottom: 20px;
 }
 
-.input-group label {
-    display: block;
+label {
     font-size: 14px;
-    color: #333;
+    color: #666;
+    margin-bottom: 5px;
+    display: block;
 }
 
-.input-group input {
-    width: 90%;
+input {
+    width: 100%;
     padding: 10px;
-    font-size: 14px;
+    font-size: 17px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-top: 5px;
+    box-sizing: border-box;
 }
 
-.input-group input:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
+/* Button style */
 .login-btn {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    font-size: 16px;
+    background-color: #0066cc;
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .login-btn:hover {
-    background-color: #45a049;
+    background-color: #0057a3;
+}
+
+/* Error message style */
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Sign up prompt style */
+.signup-prompt {
+    text-align: center;
+    font-size: 15.5px;
+    margin-top: 20px;
+}
+
+.signup-link {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
 }
